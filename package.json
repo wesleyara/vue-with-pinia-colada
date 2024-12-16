@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pinia/colada": "^0.13.0",
     "@vueuse/core": "^10.11.0",
+    "axios": "^1.7.9",
     "oh-vue-icons": "^1.0.0-rc3",
     "pinia": "^2.1.7",
     "sass": "^1.77.6",

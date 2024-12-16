@@ -1,8 +1,34 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
+import { ref, watch } from "vue";
+import { useAuth } from "../composables/useAuth";
 const msg = ref("Hello Vite + Vue 3 Template");
-const count = ref(0);
+
+const { loginAccount, createAccount, account } = useAuth();
+
+const handleLoginAccount = () => {
+  return loginAccount.mutateAsync({
+    email: "teste@gmail.com",
+    password: "!1234Teste",
+  });
+};
+
+const handleCreateAccount = () => {
+  return createAccount.mutateAsync({
+    name: "teste",
+    email: "teste@gmail.com",
+    password: "!1234Teste",
+  });
+};
+
+watch(
+  account,
+  value => {
+    console.log(value);
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
 
 <template>
@@ -16,35 +42,21 @@ const count = ref(0);
     <button
       class="rounded-md border border-black p-2"
       type="button"
-      @click="count++"
+      @click="handleCreateAccount"
     >
-      count is {{ count }}
+      CreateAccount
+    </button>
+
+    <button
+      class="rounded-md border border-black p-2"
+      type="button"
+      @click="handleLoginAccount"
+    >
+      LoginAccount
     </button>
 
     <span>
-      <p>
-        Edit
-        <code class="rounded-md bg-[#ebebeb] p-1 font-barlow"
-          >views/HomeView.vue</code
-        >
-        to test HMR
-      </p>
-
-      <p>
-        This template is also available in
-        <a
-          class="text-blue-500 hover:underline"
-          href="https://github.com/wesleyara/vue-template"
-          target="_blank"
-        >
-          GitHub
-        </a>
-      </p>
-
-      <p>
-        Have configured Eslint, Prettier, Pinia, TailwindCSS, VueIcons, VueUse,
-        Vue Devtools and Vue Router.
-      </p>
+      {{ JSON.stringify(account) }}
     </span>
   </section>
 </template>

@@ -7,6 +7,7 @@ import { OhVueIcon, addIcons } from "oh-vue-icons";
 import { BiGithub } from "oh-vue-icons/icons";
 import { createPinia } from "pinia";
 import router from "./router";
+import { PiniaColada } from "@pinia/colada";
 
 addIcons(BiGithub);
 
@@ -15,5 +16,6 @@ const pinia = createPinia();
 
 app.component("VIcon", OhVueIcon);
 app.use(pinia);
+app.use(PiniaColada)
 app.use(router);
 app.mount("#app");
